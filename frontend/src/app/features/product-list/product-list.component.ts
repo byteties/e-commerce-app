@@ -33,6 +33,7 @@ export class ProductListComponent {
 
   private getProducts() {
     this.productService.getProducts(this.currentPage, this.productsPerPage).subscribe((products: ProductResponse) => {
+      console.log("products",products)
       this.products = products.data;
       this.totalPages = this.getTotalPages(products.total);
       this.filterProducts = this.products;
