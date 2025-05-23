@@ -1,6 +1,8 @@
-import { Controller, Post, Body, Param, Delete, Get } from '@nestjs/common';
+import { Controller, Post, Body, Param, Delete, Get, ParseIntPipe } from '@nestjs/common';
 import { CartService } from './cart.service';
 import { CartItem } from './cart-item.interface';
+import { AddToCartDto } from './dto/add-to-cart.dto';
+import { UpdateQuantityDto } from './dto/update-quantity.dto';
 
 @Controller('cart')
 export class CartController {
@@ -12,21 +14,21 @@ export class CartController {
   }
 
   @Post('add')
-  addToCart(@Body() body: { productId: number }): void {
+  addToCart(@Body() body: AddToCartDto): void {
     const { productId } = body;
     this.cartService.addToCart(productId);
   }
 
-  @Delete('remove/:productId')
-  removeFromCart(@Param('productId') productId: number): void {
-    this.cartService.removeFromCart(Number(productId));
+  @Delete('remove/:id')
+  removeFromCart(@Param('id', ParseIntPipe) id: number): void {
+    this.cartService.removeFromCart(id);
   }
 
   @Post('update')
   updateQuantity(
-    @Body('productId') productId: number,
-    @Body('quantity') quantity: number
+    @Body() body: UpdateQuantityDto
   ): void {
+    const { productId, quantity } = body;
     this.cartService.updateQuantity(productId, quantity);
   }
 

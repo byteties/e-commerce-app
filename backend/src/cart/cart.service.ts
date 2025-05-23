@@ -40,7 +40,7 @@ export class CartService {
 
   getCartProducts(): ProductCartItem[] {
     return this.cart.map((item) => {
-      const product = this.productService.getProduct(item.productId.toString());
+      const product = this.productService.getProduct(item.productId);
       return {
         ...product,
         quantity: item.quantity

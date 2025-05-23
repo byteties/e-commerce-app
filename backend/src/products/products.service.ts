@@ -56,7 +56,7 @@ export class ProductsService {
         }
     }
 
-    getProduct(id: string): any {
-        return this.products.find(product => product.id === parseInt(id));
+    getProduct(id: number): any {
+        return this.products.find(product => product.id === id);
     }
 }
