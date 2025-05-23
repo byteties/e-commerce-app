@@ -9,6 +9,10 @@
       autocomplete="off"
     />
     <div class="back-list-nav-bar">
+    <button mat-flat-button color="accent" [disabled]="cartProducts.length === 0" (click)="toCheckoutPage()">
+      <mat-icon>payment</mat-icon>
+        Checkout
+    </button>
     <button mat-flat-button (click)="toProductList()">
       <mat-icon>arrow_back</mat-icon>
       Back to List

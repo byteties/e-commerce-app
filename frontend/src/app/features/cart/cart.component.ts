@@ -25,9 +25,11 @@ export class CartComponent implements OnInit {
   cartCount: number = 0;
   filterProducts: ProductCartItem[] = [];
   searchText = "";
-  private router = inject(Router);
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getCartProducts()
@@ -62,5 +64,9 @@ export class CartComponent implements OnInit {
 
   toProductList() {
     this.router.navigate(['/products']);
+  }
+
+  toCheckoutPage() {
+    this.router.navigate(['/checkout']);
   }
 }

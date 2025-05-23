@@ -1,0 +1,41 @@
+<div class="checkout-container">
+  <button mat-flat-button class="back-to-cart-btn" (click)="toCart()">Back to Cart</button>
+
+  <h2>Checkout</h2>
+
+  <div *ngIf="cartProducts.length > 0">
+    <h3>Order Summary</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartProducts">
+          <td>{{ item.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>${{ item.price * item.quantity }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Total Items: {{ cartCount }}</p>
+    <p>Total Price: ${{ totalPrice }}</p>
+  </div>
+
+  <div class="user-form">
+    <label for="userName">Name:</label>
+    <input id="userName" type="text" [(ngModel)]="userName" placeholder="Enter your name" />
+
+    <label for="userEmail">Email:</label>
+    <input id="userEmail" type="email" [(ngModel)]="userEmail" placeholder="Enter your email" />
+
+    <label for="userAddress">Shipping Address:</label>
+    <input id="userAddress" type="text" [(ngModel)]="userAddress" placeholder="Enter your shipping address" />
+  </div>
+
+  <button mat-flat-button (click)="placeOrder()">Place Order</button>
+</div>
