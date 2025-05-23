@@ -4,22 +4,27 @@ import { PexelsService } from 'src/pexels/pexels.service';
 @Injectable()
 export class ProductsService {
     private products = [
-        {id: 1, name: 'Car', price: 100, image: 'https://via.placeholder.com/150',details: 'This is a car',category: 'Car'},
-        {id: 2, name: 'Book', price: 200, image: 'https://via.placeholder.com/150',details: 'This is a book',category: 'Book'},
-        {id: 3, name: 'Computer', price: 300, image: 'https://via.placeholder.com/150',details: 'This is a computer',category: 'Computer'},
-        {id: 4, name: 'Phone', price: 400, image: 'https://via.placeholder.com/150',details: 'This is a phone',category: 'Phone'},
-        {id: 5, name: 'Watch', price: 500, image: 'https://via.placeholder.com/150',details: 'This is a watch',category: 'Watch'},
-        {id: 6, name: 'T-shirt', price: 600, image: 'https://via.placeholder.com/150',details: 'This is a t-shirt',category: 'T-shirt'},
-        {id: 7, name: 'Shoes', price: 700, image: 'https://via.placeholder.com/150',details: 'This is a shoes',category: 'Shoes'},
-        {id: 8, name: 'Hat', price: 800, image: 'https://via.placeholder.com/150',details: 'This is a hat',category: 'Hat'},
-        {id: 9, name: 'Jacket', price: 900, image: 'https://via.placeholder.com/150',details: 'This is a jacket',category: 'Jacket'},
-        {id: 10, name: 'Trousers', price: 1000, image: 'https://via.placeholder.com/150',details: 'This is a trousers',category: 'Trousers'},    
-        {id: 11, name: 'Socks', price: 1100, image: 'https://via.placeholder.com/150',details: 'This is a socks',category: 'Socks'},
-        {id: 12, name: 'Gloves', price: 1200, image: 'https://via.placeholder.com/150',details: 'This is a gloves',category: 'Gloves'},
-        {id: 13, name: 'Scarf', price: 1300, image: 'https://via.placeholder.com/150',details: 'This is a scarf',category: 'Scarf'},
-        {id: 14, name: 'Gown', price: 1400, image: 'https://via.placeholder.com/150',details: 'This is a gown',category: 'Gown'},
-        {id: 15, name: 'Dress', price: 1500, image: 'https://via.placeholder.com/150',details: 'This is a dress',category: 'Dress'},
-        {id: 16, name: 'Skirt', price: 1600, image: 'https://via.placeholder.com/150',details: 'This is a skirt',category: 'Skirt'},
+        {id: 1, name: 'Car', price: 100, image: '',details: 'This is a car',category: 'Electronic'},
+        {id: 2, name: 'Book', price: 200, image: '',details: 'This is a book',category: 'Education'},
+        {id: 3, name: 'Computer', price: 300, image: '',details: 'This is a computer',category: 'Electronic'},
+        {id: 4, name: 'Phone', price: 400, image: '',details: 'This is a phone',category: 'Electronic'},
+        {id: 5, name: 'Watch', price: 100, image: '',details: 'This is a watch',category: 'Electronic'},
+        {id: 6, name: 'Car 2', price: 100, image: '',details: 'This is a car',category: 'Electronic'},
+        {id: 7, name: 'Book 2', price: 200, image: '',details: 'This is a book',category: 'Education'},
+        {id: 8, name: 'Computer 2', price: 300, image: '',details: 'This is a computer',category: 'Electronic'},
+        {id: 9, name: 'Phone 2', price: 400, image: '',details: 'This is a phone',category: 'Electronic'},
+        {id: 10, name: 'Watch 2', price: 500, image: '',details: 'This is a watch',category: 'Electronic'},
+        {id: 11, name: 'T-shirt', price: 100, image: '',details: 'This is a t-shirt',category: 'Clothing'},
+        {id: 12, name: 'Shoes', price: 700, image: '',details: 'This is a shoes',category: 'Clothing'},
+        {id: 13, name: 'Hat', price: 800, image: '',details: 'This is a hat',category: 'Clothing'},
+        {id: 14, name: 'Jacket', price: 900, image: '',details: 'This is a jacket',category: 'Clothing'},
+        {id: 15, name: 'Trousers', price: 100, image: '',details: 'This is a trousers',category: 'Clothing'},    
+        {id: 16, name: 'Socks', price: 1100, image: '',details: 'This is a socks',category: 'Clothing'},
+        {id: 17, name: 'Gloves', price: 100, image: '',details: 'This is a gloves',category: 'Clothing'},
+        {id: 18, name: 'Scarf', price: 1300, image: '',details: 'This is a scarf',category: 'Clothing'},
+        {id: 19, name: 'Gown', price: 1400, image: '',details: 'This is a gown',category: 'Clothing'},
+        {id: 20, name: 'Dress', price: 1500, image: '',details: 'This is a dress',category: 'Clothing'},
+        {id: 21, name: 'Skirt', price: 1600, image: '',details: 'This is a skirt',category: 'Clothing'},
     ]
 
     constructor(private readonly pexelsService: PexelsService) {}
@@ -32,8 +37,14 @@ export class ProductsService {
     async getProducts(page: number = 1, limit: number = 10): Promise<any> {
 
         const imagePromises = this.products.map(async (product) => {
-            const image = await this.getImages(product.name, 1, 1);
-            product.image = image.photos[0]?.src.medium;
+            // const image = await this.getImages(product.name, 1, 1);
+            // if(image && image.photos && image.photos.length > 0) {
+            //     product.image = image.photos[0]?.src?.medium;
+            // } else {
+            //     product.image = '';
+            // }
+            product.image = 'assets/animal-login-illustration.png';
+            return product;
         });
     
         await Promise.all(imagePromises);
