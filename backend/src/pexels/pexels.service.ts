@@ -23,7 +23,7 @@ export class PexelsService {
       );
       return response.data;
     } catch (error) {
-      throw new Error('Failed to fetch images from Pexels');
+      console.log('Failed to fetch images from Pexels', error);
     }
   }
 }

@@ -1,0 +1,35 @@
+<main class="main">
+  <div class="login-container">
+    <div class="login-image">
+      <img src="assets/animal-login-illustration.png" alt="Login Illustration" />
+    </div>
+    <form (ngSubmit)="login()" #loginForm="ngForm" autocomplete="off" class="login-form">
+      <h2 class="title">Loop Marketpalce</h2>
+      <p class="subtitle">Everything your need, can find here</p>
+      <div class="form-group">
+        <input
+          type="text"
+          name="username"
+          [(ngModel)]="username"
+          required
+          placeholder="Username"
+          class="input"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          required
+          placeholder="Password"
+          class="input"
+        />
+      </div>
+      <button mat-flat-button color="primary" class="login-btn">
+        Login
+      </button>
+      <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+    </form>
+  </div>
+</main>

@@ -1,0 +1,114 @@
+.main {
+  min-height: 100vh;
+  background: linear-gradient(140deg, #eae6f7 0%, #f8fafd 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-container {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 6px 28px 0 rgba(80, 86, 160, 0.10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 1.6rem 2.2rem 1.6rem;
+  min-width: 320px;
+  max-width: 350px;
+  width: 100%;
+}
+
+.login-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.6rem;
+  img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px 0 rgba(80,86,160,0.09);
+    background: #f9f7ff;
+  }
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 0.1em;
+  color: #3c3070;
+  letter-spacing: 0.04em;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 1em;
+  color: #70718a;
+  margin-bottom: 1.2em;
+}
+
+.form-group {
+  margin-bottom: 1.1em;
+}
+
+.input {
+  width: 90%;
+  padding: 0.9em 1.2em;
+  border-radius: 2em;
+  border: 1.5px solid #d3d7e0;
+  font-size: 1em;
+  background: #fafaff;
+  transition: border 0.15s;
+  outline: none;
+  &:focus {
+    border-color: #755afc;
+    background: #fff;
+  }
+}
+
+.login-btn {
+  width: 100%;
+  padding: 0.9em;
+  margin-top: 0.5em;
+  border-radius: 2em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  font-size: 1.1em;
+  background: linear-gradient(98deg, #755afc 30%, #4c3bbb 100%);
+  color: #fff;
+  box-shadow: 0 2px 8px 0 rgba(120,106,236,0.09);
+  border: none;
+  transition: background 0.15s;
+  &:hover {
+    background: linear-gradient(98deg, #6550cc 30%, #3c3070 100%);
+  }
+}
+
+.error {
+  color: #f44336;
+  margin-top: 1em;
+  font-size: 0.97em;
+  text-align: center;
+}
+
+@media (max-width: 460px) {
+  .login-container {
+    min-width: 90vw;
+    max-width: 98vw;
+    padding: 1.3rem 0.5rem 1.6rem 0.5rem;
+  }
+  .login-image img {
+    width: 84px;
+    height: 84px;
+  }
+}
