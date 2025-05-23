@@ -11,7 +11,7 @@ export class ProductService {
 
    constructor(
     private http: HttpClient,
-) {}
+ ) {}
 
    getProducts(page: number = 0, limit: number = 10) {
     return this.http.get<ProductResponse>(`${this.apiUrl}?page=${page}&limit=${limit}`);

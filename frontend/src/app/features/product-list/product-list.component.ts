@@ -82,8 +82,10 @@ export class ProductListComponent {
   }
 
   countingCart() {
-    const count = this.cartService.getCartCount()
-    this.countCart = count === 0 ? '' : count.toString()
+    this.cartService.getCartProducts().subscribe((products) => {
+      const count = products.reduce((sum, item) => sum + item.quantity, 0)
+      this.countCart = count === 0 ? '' : count.toString()
+    })
   }
 
   viewDetails(product: Product): void {
