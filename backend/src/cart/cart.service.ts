@@ -1,53 +1,50 @@
 import { Injectable } from '@nestjs/common';
-import { CartItem } from './cart-item.interface';
+import { CartItem, ProductCartItem } from './cart-item.interface';
+import { ProductsService } from 'src/products/products.service';
 
 @Injectable()
 export class CartService {
+  private cart: CartItem[] = [];
 
-  private cartKey: string = 'cart';
-
-  constructor() {}
+  constructor(private readonly productService: ProductsService) {}
 
   addToCart(productId: number): void {
-    const cartItems = this.getCart();
-    const existingItem = cartItems.find((item) => item.productId === productId);
+    const existingItem = this.cart.find((item) => item.productId === productId);
 
     if (existingItem) {
-      existingItem.quantity += 1;
+      existingItem.quantity += 1;  
     } else {
-      cartItems.push({ productId, quantity: 1 });
+      this.cart.push({ productId, quantity: 1 });  
     }
-
-    localStorage.setItem(this.cartKey, JSON.stringify(cartItems));
   }
 
   removeFromCart(productId: number): void {
-    const cartItems = this.getCart();
-    const updatedCart = cartItems.filter((item) => item.productId !== productId);
-    localStorage.setItem(this.cartKey, JSON.stringify(updatedCart));
+    this.cart = this.cart.filter((item) => item.productId !== productId);  
   }
 
   updateQuantity(productId: number, quantity: number): void {
-    const cartItems = this.getCart();
-    const itemIndex = cartItems.findIndex((item) => item.productId === productId);
+    const itemIndex = this.cart.findIndex((item) => item.productId === productId);
     
     if (itemIndex !== -1) {
-      cartItems[itemIndex].quantity = quantity;
-      localStorage.setItem(this.cartKey, JSON.stringify(cartItems));
+      this.cart[itemIndex].quantity = quantity;  
     }
   }
 
   getCart(): CartItem[] {
-    const cart = localStorage.getItem(this.cartKey);
-    return cart ? JSON.parse(cart) : [];
-  }
-
-  getCartCount(): number {
-    const cartItems = this.getCart();
-    return cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    return this.cart;  
   }
 
   clearCart(): void {
-    localStorage.removeItem(this.cartKey); 
+    this.cart = [];  
+  }
+
+  getCartProducts(): ProductCartItem[] {
+    return this.cart.map((item) => {
+      const product = this.productService.getProduct(item.productId.toString());
+      return {
+        ...product,
+        quantity: item.quantity
+      };
+    });
   }
 }

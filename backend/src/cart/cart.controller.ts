@@ -6,14 +6,20 @@ import { CartItem } from './cart-item.interface';
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
+  @Get('')
+  getCart(): CartItem[] {
+    return this.cartService.getCart();
+  }
+
   @Post('add')
-  addToCart(@Body() productId: number): void {
+  addToCart(@Body() body: { productId: number }): void {
+    const { productId } = body;
     this.cartService.addToCart(productId);
   }
 
   @Delete('remove/:productId')
   removeFromCart(@Param('productId') productId: number): void {
-    this.cartService.removeFromCart(productId);
+    this.cartService.removeFromCart(Number(productId));
   }
 
   @Post('update')
@@ -24,18 +30,13 @@ export class CartController {
     this.cartService.updateQuantity(productId, quantity);
   }
 
-  @Get('items')
-  getCart(): CartItem[] {
-    return this.cartService.getCart();
-  }
-
-  @Get('count')
-  getCartCount(): number {
-    return this.cartService.getCartCount();
-  }
-
   @Delete('clear')
   clearCart(): void {
     this.cartService.clearCart();
+  }
+
+  @Get('items')
+  getCartProducts() {
+    return this.cartService.getCartProducts();
   }
 }
