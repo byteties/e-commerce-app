@@ -1,0 +1,57 @@
+<div class="main">
+  <div class="search-bar-container">
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      (ngModelChange)="applyFilter()"
+      placeholder="Search by name , detail, category, or price"
+      class="search-bar"
+      autocomplete="off"
+    />
+    <div class="back-list-nav-bar">
+    <button mat-flat-button (click)="toProductList()">
+      <mat-icon>arrow_back</mat-icon>
+      Back to List
+    </button>
+    </div>
+  </div>  
+  <div class="cart">
+    <h2>Your Cart</h2>
+    <div *ngIf="cartItems.length === 0">
+      <p>Your cart is empty.</p>
+    </div>
+  
+    <table *ngIf="cartItems.length > 0">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Name</th>
+          <th>Detail</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartProducts">
+          <td><img [src]="item.image" alt="{{ item.name }}" width="100"></td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.details }}</td>
+          <td>${{ item.price }}</td>
+          <td>
+            <input type="number" [(ngModel)]="item.quantity" (change)="updateQuantity(item.id, item.quantity)" min="1">
+          </td>
+          <td>
+            <button (click)="removeFromCart(item.id)">Remove</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div *ngIf="cartItems.length > 0">
+      <button class="clear-btn" (click)="clearCart()">Clear Cart</button>
+      <p>Total items: {{ cartCount }}</p>
+    </div>
+  </div>
+</div>
+

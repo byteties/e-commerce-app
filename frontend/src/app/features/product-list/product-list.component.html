@@ -3,14 +3,14 @@
     type="text"
     [(ngModel)]="searchText"
     (ngModelChange)="applyFilter()"
-    placeholder="Search by name , detail, or price"
+    placeholder="Search by name , detail, category, or price"
     class="search-bar"
     autocomplete="off"
   />
   <div class="cart-nav-bar">
-  <button mat-flat-button color="accent">
+  <button mat-flat-button color="accent" (click)="viewCart()">
     <mat-icon>shopping_cart</mat-icon>
-    View Cart
+    View Cart <span *ngIf="countCart" class="count-cart">{{countCart}}</span>
   </button>
   <button mat-flat-button color="warn" class="logout-btn" (click)="logout()">
       <mat-icon>logout</mat-icon>

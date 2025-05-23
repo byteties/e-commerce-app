@@ -8,7 +8,6 @@ export interface Product {
 }
 
 export interface ProductResponse {
-    subscribe(arg0: (products: ProductResponse) => void): unknown;
     data: Product[];
     total: number;
     page: number;

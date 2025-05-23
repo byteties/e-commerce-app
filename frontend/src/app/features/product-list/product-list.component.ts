@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { CartService } from '../../core/services/cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -20,8 +21,10 @@ export class ProductListComponent {
   modalOpen: boolean = false;
   searchText = ""
   filterProducts: any[] = []
+  countCart: string = '';
   constructor(
     private productService: ProductService,
+    private cartService: CartService
   ) {}
   public currentPage = 1;
   public productsPerPage = 10;
@@ -38,6 +41,7 @@ export class ProductListComponent {
 
   ngOnInit() {
     this.getProducts()
+    this.countingCart()
   }
 
   applyFilter(){
@@ -45,7 +49,8 @@ export class ProductListComponent {
     this.filterProducts = this.products.filter((product)=> 
       product.name.toLowerCase().includes(text) ||
       product.category.toLowerCase().includes(text) ||
-      product.price.toString().includes(text)
+      product.price.toString().includes(text) ||
+      product.details.toLowerCase().includes(text)
     )
   }
 
@@ -67,8 +72,18 @@ export class ProductListComponent {
     }
   }
 
-  addToCart(product: any) {
-    console.log('Added to cart:', product);
+  addToCart(product: Product) {
+    this.cartService.addToCart(product.id)
+    this.countingCart()
+  }
+
+  viewCart() {
+    this.router.navigate(['/cart'])
+  }
+
+  countingCart() {
+    const count = this.cartService.getCartCount()
+    this.countCart = count === 0 ? '' : count.toString()
   }
 
   viewDetails(product: Product): void {

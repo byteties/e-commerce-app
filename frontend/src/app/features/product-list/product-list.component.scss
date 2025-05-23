@@ -49,6 +49,19 @@
       color: #e53935;
     }
   }
+
+  .count-cart {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    background-color: #ff4081;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 0.2em 0.5em;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
 }
 
 .main {
