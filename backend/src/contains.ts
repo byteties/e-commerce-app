@@ -1,0 +1,1 @@
+export const PIXEL_URL = 'https://api.pexels.com/v1/search';

@@ -3,6 +3,7 @@ import { PexelsService } from 'src/pexels/pexels.service';
 
 @Injectable()
 export class ProductsService {
+    private defaultImage = 'assets/animal-login-illustration.png';
     private products = [
         {id: 1, name: 'Car', price: 100, image: '',details: 'This is a car',category: 'Electronic'},
         {id: 2, name: 'Book', price: 200, image: '',details: 'This is a book',category: 'Education'},
@@ -37,13 +38,12 @@ export class ProductsService {
     async getProducts(page: number = 1, limit: number = 10): Promise<any> {
 
         const imagePromises = this.products.map(async (product) => {
-            // const image = await this.getImages(product.name, 1, 1);
-            // if(image && image.photos && image.photos.length > 0) {
-            //     product.image = image.photos[0]?.src?.medium;
-            // } else {
-            //     product.image = '';
-            // }
-            product.image = 'assets/animal-login-illustration.png';
+            const image = await this.getImages(product.name, 1, 1);
+            if(image && image.photos && image.photos.length > 0) {
+                product.image = image.photos[0]?.src?.medium;
+            } else {
+                product.image = this.defaultImage;
+            }
             return product;
         });
     
