@@ -1,4 +1,4 @@
-import { Product } from "src/products/product.interface";
+import { Product } from "../products/product.interface";
 
 export interface CartItem {
     productId: number;

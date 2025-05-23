@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PexelsService } from 'src/pexels/pexels.service';
+import { PexelsService } from '../pexels/pexels.service';
 
 @Injectable()
 export class ProductsService {

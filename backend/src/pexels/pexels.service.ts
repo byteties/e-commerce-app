@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs'; 
-import { PIXEL_URL } from 'src/contains';
+import { PIXEL_URL } from '../contains';
 
 @Injectable()
 export class PexelsService {
@@ -24,7 +24,7 @@ export class PexelsService {
       );
       return response.data;
     } catch (error) {
-      console.log('Failed to fetch images from Pexels', error);
+      console.info('Failed to fetch images from Pexels', error);
     }
   }
 }

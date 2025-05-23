@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CartItem, ProductCartItem } from './cart-item.interface';
-import { ProductsService } from 'src/products/products.service';
+import { ProductsService } from '../products/products.service';
 
 @Injectable()
 export class CartService {
