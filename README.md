@@ -8,7 +8,7 @@ This is an E-Commerce application designed to provide a platform for users to br
 
 - **Frontend**: Angular, TypeScript, Angular Material
 - **Backend**: NestJS, TypeScript, HTTP requests
-- **Testing**: Cypress for frontend testing
+- **Testing**: Cypress for frontend testing / Jest for backend unit test
 - **Styling**: SCSS
 - **Database**: Local storage for cart data (can be replaced with a real database in future versions)
 - **Image API**: Pexels API for fetching product images
