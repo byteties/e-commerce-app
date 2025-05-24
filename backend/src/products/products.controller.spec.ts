@@ -42,7 +42,7 @@ describe('ProductsController', () => {
       const result = { id: '1', name: 'Product 1' };
       jest.spyOn(service, 'getProduct').mockResolvedValue(result);
 
-      expect(await controller.getProduct('1')).toBe(result);
+      expect(await controller.getProduct(1)).toBe(result);
     });
   });
 });

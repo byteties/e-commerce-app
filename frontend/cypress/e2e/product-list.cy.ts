@@ -18,13 +18,15 @@ describe('Product List', () => {
     });
   
     it('should go to the next page when next is clicked', () => {
-      cy.get('.pagination button').contains('Next').click();
-      cy.contains('Previous').should('be.enabled');
+      cy.get('.next-pagination-btn').click();
+      cy.wait(1000);
+      cy.get('.prev-pagination-btn').should('be.enabled');
     });
 
-    it('search car 2 and only show car 2', () => {
-      cy.get('input[name="search"]').type('car 2');
-      cy.contains('Car 2').should('be.visible');
+    it('search Computer 2 and only show Computer 2', () => {
+      cy.wait(1000);
+      cy.get('input[name="search"]').type('Computer 2');
+      cy.contains('Computer 2').should('be.visible');
       cy.get('.product-card').should('have.length', 1);
     });
     it('add product to cart 2 times', () => {

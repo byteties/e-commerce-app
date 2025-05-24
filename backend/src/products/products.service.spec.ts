@@ -56,7 +56,7 @@ describe('ProductsService', () => {
 
   describe('getProduct', () => {
     it('should return a product by id', () => {
-      const result = service.getProduct('1');
+      const result = service.getProduct(1);
 
       expect(result).toEqual({
         id: 1,
@@ -69,7 +69,7 @@ describe('ProductsService', () => {
     });
 
     it('should return undefined if product id does not exist', () => {
-      const result = service.getProduct('999');
+      const result = service.getProduct(999);
 
       expect(result).toBeUndefined();
     });
