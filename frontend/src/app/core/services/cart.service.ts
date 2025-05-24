@@ -10,14 +10,12 @@ export class CartService {
 
   constructor(private http: HttpClient) {}
 
-  addToCart(productId: number): void {
-    this.http.post(`${this.apiUrl}/add`, { productId }).subscribe(() => {
-    });
+  addToCart(productId: number) {
+    return this.http.post(`${this.apiUrl}/add`, { productId });
   }
 
-  removeFromCart(productId: number): void {
-    this.http.delete(`${this.apiUrl}/remove/${productId}`).subscribe(() => {
-    });
+  removeFromCart(productId: number) {
+    return this.http.delete(`${this.apiUrl}/remove/${productId}`);
   }
 
   updateQuantity(productId: number, quantity: number): void {

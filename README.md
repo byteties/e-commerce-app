@@ -29,6 +29,7 @@ This is an E-Commerce application designed to provide a platform for users to br
 ### 📝 Areas of Improvement
 - Real Database Integration: The cart data is stored in local storage. A more persistent solution like MongoDB or PostgreSQL can be used for production.
     - Database schema: implement schema to ensure user can get cart correctly
+    - Search feature: improve by using database feature search / database like elastic / some AI search database that I don't know.
 - Payment Integration: No payment system is implemented. This can be integrated with services like Stripe or PayPal.
 - Authentication: User authentication (login/signup) could be added, along with JWT tokens for secure user sessions.
 - Responsive Design: Although the app is somewhat responsive, further improvements can be made for better mobile usability.

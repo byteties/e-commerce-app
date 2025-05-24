@@ -47,9 +47,10 @@ export class CartComponent implements OnInit {
     this.getCartProducts();
   }
 
-  async removeFromCart(productId: number): Promise<void> {
-    await this.cartService.removeFromCart(productId);
-    this.getCartProducts();
+  removeFromCart(productId: number): void{
+    this.cartService.removeFromCart(productId).subscribe(() => {
+      this.getCartProducts();
+    })
   }
 
   applyFilter() {
