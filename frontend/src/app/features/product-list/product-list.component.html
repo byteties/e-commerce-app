@@ -1,6 +1,7 @@
 <div class="search-bar-container">
   <input 
     type="text"
+    name="search"
     [(ngModel)]="searchText"
     (ngModelChange)="applyFilter()"
     placeholder="Search by name , detail, category, or price"
@@ -8,7 +9,7 @@
     autocomplete="off"
   />
   <div class="cart-nav-bar">
-  <button mat-flat-button color="accent" (click)="viewCart()">
+  <button mat-flat-button color="accent" class="view-cart-btn" (click)="viewCart()">
     <mat-icon>shopping_cart</mat-icon>
     View Cart <span *ngIf="countCart" class="count-cart">{{countCart}}</span>
   </button>

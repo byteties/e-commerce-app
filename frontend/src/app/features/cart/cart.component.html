@@ -13,7 +13,7 @@
       <mat-icon>payment</mat-icon>
         Checkout
     </button>
-    <button mat-flat-button (click)="toProductList()">
+    <button mat-flat-button class="back-btn" (click)="toProductList()">
       <mat-icon>arrow_back</mat-icon>
       Back to List
     </button>
@@ -21,7 +21,7 @@
   </div>  
   <div class="cart">
     <h2>Your Cart</h2>
-    <div *ngIf="filterProducts.length === 0">
+    <div class="empty-cart" *ngIf="filterProducts.length === 0">
       <p>Your cart is empty.</p>
     </div>
   
@@ -43,7 +43,7 @@
           <td>{{ item.details }}</td>
           <td>${{ item.price }}</td>
           <td>
-            <input type="number" [(ngModel)]="item.quantity" (change)="updateQuantity(item.id, item.quantity)" min="1">
+            <input class="quantity-input" type="number" [(ngModel)]="item.quantity" (change)="updateQuantity(item.id, item.quantity)" min="1">
           </td>
           <td>
             <button (click)="removeFromCart(item.id)">Remove</button>
