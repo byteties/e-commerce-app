@@ -1,16 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PexelsService } from './pexels.service';
 import { HttpService } from '@nestjs/axios';
+import { ConfigService } from '@nestjs/config';
 import { of, throwError } from 'rxjs'; 
-
 
 jest.mock('@nestjs/axios')
 jest.mock('../contains', () => ({
   PIXEL_URL: 'https://mocked-url.com/v1/search',
 }))
+
 describe('PexelsService', () => {
   let pexelsService: PexelsService;
   let httpService: HttpService;
+  const mockApiKey = 'test-api-key';
 
   beforeEach(async () => {
     console.info = jest.fn;
@@ -21,6 +23,15 @@ describe('PexelsService', () => {
           provide: HttpService,
           useValue: {
             get: jest.fn(), 
+          },
+        },
+        {
+          provide: ConfigService,
+          useValue: {
+            get: jest.fn((key: string) => {
+              if (key === 'PEXELS_API_KEY') return mockApiKey;
+              return null;
+            }),
           },
         },
       ],
@@ -57,7 +68,7 @@ describe('PexelsService', () => {
         'https://mocked-url.com/v1/search',
         expect.objectContaining({
           params: { query: 'nature', page: 1, per_page: 10 },
-          headers: { Authorization: 'GUf57xVNtrNOnKgBoyWquFYskHgtJoRlLFNq5R3sN9DR41yueLP48iYU' },
+          headers: { Authorization: mockApiKey },
         }),
       );
     });
