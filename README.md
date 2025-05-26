@@ -53,22 +53,29 @@ cd e-commerce-app
 cd frontend
 npm install
 ```
-
-##  3. Run the applications
+### Start Backend (NestJS)
+##  2. Run the applications
 ### Start Backend (NestJS)
 ```bash
 cd backend
 docker-compose up --build -d
 # The server runs on http://localhost:3000 in docker on background
 ```
-## Start Frontend (Angular)
+
+##  3. Run Seed User and Produts at first time
+```bash
+# call api 
+POST http://localhost:3000/users/seed
+POST http://localhost:3000/products/seed
+```
+
+## 4. Start Frontend (Angular)
 ```bash
 # open new terminal
 cd frontend
 npm run start
 # The app runs on http://localhost:4200
 ```
-
 ## 🌐 Usage
 
 - Visit http://localhost:4200
@@ -86,7 +93,7 @@ npm run start
 ```bash
 # setup test
 ## should run backend and frontend first
-## follow step `3. Run the applications`
+## follow step `2 and 4`
 # new terminal
 cd frontend
 npm run cypress:run
