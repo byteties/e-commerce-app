@@ -8,25 +8,25 @@ This is an E-Commerce application designed to provide a platform for users to br
 
 - **Frontend**: Angular, TypeScript, Angular Material
 - **Backend**: NestJS, TypeScript, HTTP requests and Authentication with basic JWT tokens for secure user sessions.
-- **Database**: MongoDB for storing products and cart data
+- **Database**: MongoDB for storing products / cart still store in ram
 - **Testing**: Cypress for frontend testing / Jest for backend unit test
 - **Styling**: SCSS
 
 ## 📝 Assumptions
 
-- The application now uses **MongoDB** as the backend database to store products and cart data.
+- The application now uses **MongoDB** as the backend database to store products.
 - The backend service is assumed to be running locally on port **3000** by default, and MongoDB is running on port **27017**.
 - The application doesn't implement actual payment processing, as the goal is to demonstrate the product browsing and cart management functionality.
-- User authentication is not yet implemented (see Areas of Improvement for this).
+- User authentication by JWT token.
 
 ### 📝 Features
 - **Product Listing**: Displays products with pagination and search functionality.
-- **Add to Cart**: Allows users to add products to their cart.
-- **Cart Management**: Users can view, remove, and update product quantities in their cart.
+- **Add to Cart**: Allows users to add products to cart.
+- **Cart Management**: Users can view, remove, and update product quantities in cart.
 - **Checkout**: Allows users to proceed to a checkout form where they enter their information (name, email, shipping address).
 
 ### 📝 Areas of Improvement
-- **Real Database Integration**: The cart and product data is now stored in **MongoDB**. We can further improve the data storage and retrieval mechanism to optimize for production.
+- **Real Database Integration**: The cart should be store in db / product data is now stored in **MongoDB**. We can further improve the data storage and retrieval mechanism to optimize for production.
 - **Cart feature**: Linking the cart to a specific user via their user ID or another unique identifier. 
 - **Database schema**: Implement schema to ensure data consistency and integrity.
 - **Seed Data**: Implement seed script and run only one time at first setup.
