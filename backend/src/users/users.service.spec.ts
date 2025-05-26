@@ -1,10 +1,41 @@
+import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from './users.service';
+import { getModelToken } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { User } from './schemas/user.schema';
 
 describe('UsersService', () => {
   let service: UsersService;
+  let model: Model<User>;
 
-  beforeEach(() => {
-    service = new UsersService();
+  const mockUser = {
+    username: 'admin',
+    password: '123456'
+  };
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        UsersService,
+        {
+          provide: getModelToken(User.name),
+          useValue: {
+            findOne: jest.fn().mockImplementation((query) => {
+              if (query.username === 'admin') {
+                return Promise.resolve(mockUser);
+              }
+              if (query.username === 'user') {
+                return Promise.resolve({ username: 'user', password: 'qwerty' });
+              }
+              return Promise.resolve(null);
+            }),
+          },
+        },
+      ],
+    }).compile();
+
+    service = module.get<UsersService>(UsersService);
+    model = module.get<Model<User>>(getModelToken(User.name));
   });
 
   it('should be defined', () => {
