@@ -2,41 +2,40 @@
 
 ## 📄 Description
 
-This is an E-Commerce application designed to provide a platform for users to browse products, add them to their cart, and proceed to checkout. The application includes product listing, search functionality, cart management, and basic order placement. It has been built using Angular for the frontend and a backend (NestJS) for handling API requests, with integration to external APIs for product image retrieval.
+This is an E-Commerce application designed to provide a platform for users to browse products, add them to their cart, and proceed to checkout. The application includes product listing, search functionality, cart management, and basic order placement. It has been built using Angular for the frontend and a backend (NestJS) for handling API requests, with integration to MongoDB for data storage.
 
 ## 📄 Technologies Used
 
 - **Frontend**: Angular, TypeScript, Angular Material
-- **Backend**: NestJS, TypeScript, HTTP requests
+- **Backend**: NestJS, TypeScript, HTTP requests and Authentication with basic JWT tokens for secure user sessions.
+- **Database**: MongoDB for storing products and cart data
 - **Testing**: Cypress for frontend testing / Jest for backend unit test
 - **Styling**: SCSS
-- **Database**: Local storage for cart data (can be replaced with a real database in future versions)
-- **Image API**: Pexels API for fetching product images
 
 ## 📝 Assumptions
 
-- The application assumes the use of **local storage** for managing the cart data. A more persistent solution, like a database, could be implemented for production environments.
+- The application now uses **MongoDB** as the backend database to store products and cart data.
+- The backend service is assumed to be running locally on port **3000** by default, and MongoDB is running on port **27017**.
 - The application doesn't implement actual payment processing, as the goal is to demonstrate the product browsing and cart management functionality.
-- The backend service is assumed to be running locally on port **3000** by default.
-
+- User authentication is not yet implemented (see Areas of Improvement for this).
 
 ### 📝 Features
-- Product Listing: Displays products with pagination and search functionality.
-- Add to Cart: Allows users to add products to their cart.
-- Cart Management: Users can view, remove, and update product quantities in their cart.
-- Checkout: Allows users to proceed to a checkout form where they enter their information (name, email, shipping address).
+- **Product Listing**: Displays products with pagination and search functionality.
+- **Add to Cart**: Allows users to add products to their cart.
+- **Cart Management**: Users can view, remove, and update product quantities in their cart.
+- **Checkout**: Allows users to proceed to a checkout form where they enter their information (name, email, shipping address).
 
 ### 📝 Areas of Improvement
-- Real Database Integration: The cart data is stored in local storage. A more persistent solution like MongoDB or PostgreSQL can be used for production.
-    - Database schema: implement schema to ensure user can get cart correctly
-    - Search feature: improve by using database feature search / database like elastic / some AI search database that I don't know.
-- Payment Integration: No payment system is implemented. This can be integrated with services like Stripe or PayPal.
-- Authentication: User authentication (login/signup) could be added, along with JWT tokens for secure user sessions.
-- Responsive Design: Although the app is somewhat responsive, further improvements can be made for better mobile usability.
-- Error Handling: Add more comprehensive error handling for API calls (e.g., handling server errors or image fetch failures).
-    - Store image: download image add first time and store in S3 to reduce traffic of api calling to third party
-    - Rendering UI: improve some performance about api call with UI interaction 
-- Testing: find best practics for cypress test 
+- **Real Database Integration**: The cart and product data is now stored in **MongoDB**. We can further improve the data storage and retrieval mechanism to optimize for production.
+- **Cart feature**: Linking the cart to a specific user via their user ID or another unique identifier. 
+- **Database schema**: Implement schema to ensure data consistency and integrity.
+- **Search feature**: Improve by using advanced search features in MongoDB, or integrate Elasticsearch for better product searching.
+- **Image storage**: Consider downloading and storing images in S3 to reduce API traffic.
+- **Payment Integration**: No payment system is implemented. This can be integrated with services like Stripe or PayPal.
+- **Responsive Design**: Although the app is somewhat responsive, further improvements can be made for better mobile usability.
+- **Error Handling**: Add more comprehensive error handling for API calls (e.g., handling server errors or image fetch failures).
+- **Rendering UI**: Improve performance of the UI by handling API calls more efficiently.
+- **Testing**: Find best practices for Cypress tests and improve the coverage for both frontend and backend.
 
 ## 🚀 Getting Started
 
@@ -47,7 +46,6 @@ To run the application locally, follow these steps:
 ```bash
 git clone https://github.com/byteties/e-commerce-app.git
 cd e-commerce-app
-```
 
 ## 2. Install dependencies
 ### Frontend
@@ -55,18 +53,13 @@ cd e-commerce-app
 cd frontend
 npm install
 ```
-### Backend
-```bash
-cd ../backend
-npm install
-```
 
 ##  3. Run the applications
 ### Start Backend (NestJS)
 ```bash
 cd backend
-npm run start:dev
-# The server runs on http://localhost:3000
+docker-compose up --build -d
+# The server runs on http://localhost:3000 in docker on background
 ```
 ## Start Frontend (Angular)
 ```bash
