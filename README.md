@@ -29,6 +29,7 @@ This is an E-Commerce application designed to provide a platform for users to br
 - **Real Database Integration**: The cart and product data is now stored in **MongoDB**. We can further improve the data storage and retrieval mechanism to optimize for production.
 - **Cart feature**: Linking the cart to a specific user via their user ID or another unique identifier. 
 - **Database schema**: Implement schema to ensure data consistency and integrity.
+- **Seed Data**: Implement seed script and run only one time at first setup.
 - **Search feature**: Improve by using advanced search features in MongoDB, or integrate Elasticsearch for better product searching.
 - **Image storage**: Consider downloading and storing images in S3 to reduce API traffic.
 - **Payment Integration**: No payment system is implemented. This can be integrated with services like Stripe or PayPal.
