@@ -1,26 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProductsService } from './products.service';
-import { PexelsService } from '../pexels/pexels.service';
 
 describe('ProductsService', () => {
   let service: ProductsService;
-  let pexelsService: PexelsService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         ProductsService,
-        {
-          provide: PexelsService,
-          useValue: {
-            getImages: jest.fn(), 
-          },
-        },
       ],
     }).compile();
 
     service = module.get<ProductsService>(ProductsService);
-    pexelsService = module.get<PexelsService>(PexelsService);
   });
 
   it('should be defined', () => {
@@ -28,29 +19,21 @@ describe('ProductsService', () => {
   });
 
   describe('getProducts', () => {
-    it('should return a list of products with images', async () => {
-      const mockImages = {
-        photos: [
-          { src: { medium: 'http://example.com/image.jpg' } },
-        ],
-      };
-
-      jest.spyOn(pexelsService, 'getImages').mockResolvedValue(mockImages);
-
+    it('should return paginated products with correct data', async () => {
       const result = await service.getProducts(1, 10);
 
-      expect(pexelsService.getImages).toHaveBeenCalledWith('Car', 1, 1);
-      expect(result.data[0].image).toBe('http://example.com/image.jpg');
-    });
-
-    it('should use default image if no image is found', async () => {
-      const mockImages = { photos: [] };
-
-      jest.spyOn(pexelsService, 'getImages').mockResolvedValue(mockImages);
-
-      const result = await service.getProducts(1, 10);
-
-      expect(result.data[0].image).toBe('assets/animal-login-illustration.png');
+      expect(result.data).toHaveLength(10);
+      expect(result.total).toBe(21);
+      expect(result.page).toBe(1);
+      expect(result.limit).toBe(10);
+      expect(result.data[0]).toEqual({
+        id: 1,
+        name: 'Car',
+        price: 100,
+        image: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&h=350',
+        details: 'This is a car',
+        category: 'Electronic'
+      });
     });
   });
 
@@ -62,7 +45,7 @@ describe('ProductsService', () => {
         id: 1,
         name: 'Car',
         price: 100,
-        image: '',
+        image: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&h=350',
         details: 'This is a car',
         category: 'Electronic',
       });
