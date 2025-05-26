@@ -1,10 +1,16 @@
 import { Product } from "./product.type";
 
 export interface CartItem {
-    productId: number;  
+    _id: string;
+    quantity: number;
+    productId: string;
+}
+
+export interface ProductCartItem {
+    product: Product;
     quantity: number;
 }
 
-export interface ProductCartItem extends Product {
-    quantity: number;
+export interface Cart {
+    items: CartItem[];
 }

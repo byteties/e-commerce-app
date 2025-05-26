@@ -42,12 +42,12 @@ export class CartComponent implements OnInit {
     });
   }
 
-  updateQuantity(productId: number, quantity: number): void {
+  updateQuantity(productId: string, quantity: number): void {
     this.cartService.updateQuantity(productId, quantity);
     this.getCartProducts();
   }
 
-  removeFromCart(productId: number): void{
+  removeFromCart(productId: string): void{
     this.cartService.removeFromCart(productId).subscribe(() => {
       this.getCartProducts();
     })
@@ -55,11 +55,11 @@ export class CartComponent implements OnInit {
 
   applyFilter() {
     const text = this.searchText.trim().toLocaleLowerCase();
-    this.filterProducts = this.cartProducts.filter((product) => 
-      product.name.toLowerCase().includes(text) ||
-      product.category.toLowerCase().includes(text) ||
-      product.price.toString().includes(text) ||
-      product.details.toLowerCase().includes(text)
+    this.filterProducts = this.cartProducts.filter((item) => 
+      item?.product?.name?.toLowerCase().includes(text) ||
+      item?.product?.category?.toLowerCase().includes(text) ||
+      item?.product?.price?.toString().includes(text) ||
+      item?.product?.details?.toLowerCase().includes(text)
     );
   }
 

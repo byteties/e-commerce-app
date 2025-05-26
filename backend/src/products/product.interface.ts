@@ -1,5 +1,7 @@
+import { Types } from 'mongoose';
+
 export interface Product {
-    id: number;
+    _id: Types.ObjectId;
     name: string;
     price: number;
     image: string;

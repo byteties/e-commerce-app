@@ -7,16 +7,18 @@ import { UsersModule } from './users/users.module';
 import { CartService } from './cart/cart.service';
 import { CartModule } from './cart/cart.module';
 import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    MongooseModule.forRoot('mongodb://root:example@mongo:27017/mydb?authSource=admin'),
     ProductsModule, 
     AuthModule, 
     UsersModule, 
-    CartModule
+    CartModule,
   ],
   controllers: [AppController],
   providers: [AppService, CartService],

@@ -1,4 +1,4 @@
-import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Post, Query } from '@nestjs/common';
 import { ProductsService } from './products.service';
 
 @Controller('products')
@@ -13,8 +13,14 @@ export class ProductsController {
         return this.productsService.getProducts(page, limit);
     }
 
+    @Post("/seed")
+    seedProducts(): Promise<void> {
+        return this.productsService.seedProducts();
+    }
+
     @Get("/:id")
-    getProduct(@Param('id', ParseIntPipe) id: number): any {
+    getProduct(@Param('id') id: string): any {
         return this.productsService.getProduct(id);
     }
+
 }

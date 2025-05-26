@@ -15,9 +15,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of cartProducts">
-          <td>{{ item.name }}</td>
+          <td>{{ item.product.name }}</td>
           <td>{{ item.quantity }}</td>
-          <td>${{ item.price * item.quantity }}</td>
+          <td>${{ item.product.price * item.quantity }}</td>
         </tr>
       </tbody>
     </table>

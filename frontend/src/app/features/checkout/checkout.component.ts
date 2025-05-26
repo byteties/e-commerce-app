@@ -38,7 +38,7 @@ export class CheckoutComponent implements OnInit {
     this.cartService.getCartProducts().subscribe((items) => {
       this.cartProducts = items;
       this.cartCount = items.reduce((sum, item) => sum + item.quantity, 0);
-      this.totalPrice = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      this.totalPrice = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
     });
   }
 

@@ -1,50 +1,50 @@
 import { Injectable } from '@nestjs/common';
-import { CartItem, ProductCartItem } from './cart-item.interface';
 import { ProductsService } from '../products/products.service';
+import { CartItem, ProductCartItem } from './cart-item.interface';
 
 @Injectable()
 export class CartService {
   private cart: CartItem[] = [];
 
-  constructor(private readonly productService: ProductsService) {}
-
-  addToCart(productId: number): void {
-    const existingItem = this.cart.find((item) => item.productId === productId);
-
-    if (existingItem) {
-      existingItem.quantity += 1;  
-    } else {
-      this.cart.push({ productId, quantity: 1 });  
-    }
-  }
-
-  removeFromCart(productId: number): void {
-    this.cart = this.cart.filter((item) => item.productId !== productId);  
-  }
-
-  updateQuantity(productId: number, quantity: number): void {
-    const itemIndex = this.cart.findIndex((item) => item.productId === productId);
-    
-    if (itemIndex !== -1) {
-      this.cart[itemIndex].quantity = quantity;  
-    }
-  }
+  constructor(private readonly productsService: ProductsService) {}
 
   getCart(): CartItem[] {
-    return this.cart;  
+    return this.cart;
+  }
+
+  addToCart(productId: string, quantity: number = 1): void {
+    const existingItem = this.cart.find(item => item.productId === productId);
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      this.cart.push({ productId, quantity });
+    }
+  }
+
+  removeFromCart(productId: string): void {
+    this.cart = this.cart.filter(item => item.productId !== productId);
+  }
+
+  updateQuantity(productId: string, quantity: number): void {
+    const item = this.cart.find(item => item.productId === productId);
+    if (item) {
+      item.quantity = quantity;
+    }
   }
 
   clearCart(): void {
-    this.cart = [];  
+    this.cart = [];
   }
 
-  getCartProducts(): ProductCartItem[] {
-    return this.cart.map((item) => {
-      const product = this.productService.getProduct(item.productId);
-      return {
-        ...product,
+  async getCartProducts(): Promise<ProductCartItem[]> {
+    const cartProducts: ProductCartItem[] = [];
+    for (const item of this.cart) {
+      const product = await this.productsService.getProduct(item.productId.toString());
+      cartProducts.push({
+        product: product,
         quantity: item.quantity
-      };
-    });
+      });
+    }
+    return cartProducts;
   }
 }

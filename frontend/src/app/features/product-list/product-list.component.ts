@@ -73,7 +73,7 @@ export class ProductListComponent {
   }
 
   addToCart(product: Product) {
-    this.cartService.addToCart(product.id).subscribe(() => {
+    this.cartService.addToCart(product._id).subscribe(() => {
       this.countingCart()
     })
   }

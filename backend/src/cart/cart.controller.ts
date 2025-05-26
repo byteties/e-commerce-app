@@ -20,7 +20,7 @@ export class CartController {
   }
 
   @Delete('remove/:id')
-  removeFromCart(@Param('id', ParseIntPipe) id: number): void {
+  removeFromCart(@Param('id') id: string): void {
     this.cartService.removeFromCart(id);
   }
 
