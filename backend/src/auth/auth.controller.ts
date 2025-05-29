@@ -13,6 +13,7 @@ export class AuthController {
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
-    return this.authService.login(user);
+    const { access_token } = await this.authService.login(user);
+    return { access_token };
   }
 }

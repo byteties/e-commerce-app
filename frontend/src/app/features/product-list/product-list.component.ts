@@ -22,6 +22,8 @@ export class ProductListComponent {
   searchText = ""
   filterProducts: any[] = []
   countCart: string = '';
+  productQuantities: { [key: string]: number } = {};
+
   constructor(
     private productService: ProductService,
     private cartService: CartService
@@ -36,7 +38,38 @@ export class ProductListComponent {
       this.products = products.data;
       this.totalPages = this.getTotalPages(products.total);
       this.filterProducts = this.products;
+      this.initializeQuantities();
     });
+  }
+
+  private initializeQuantities() {
+    this.cartService.getCartProducts().subscribe(products => {
+      products.forEach(item => {
+        this.productQuantities[item.product._id] = item.quantity;
+      });
+    });
+  }
+
+  getProductQuantity(product: Product): number {
+    return this.productQuantities[product._id] || 0;
+  }
+
+  increaseQuantity(product: Product) {
+    const currentQuantity = this.getProductQuantity(product);
+    this.productQuantities[product._id] = currentQuantity + 1;
+    this.cartService.addToCart(product._id).subscribe(() => {
+      this.countingCart();
+    });
+  }
+
+  decreaseQuantity(product: Product) {
+    const currentQuantity = this.getProductQuantity(product);
+    if (currentQuantity > 0) {
+      this.productQuantities[product._id] = currentQuantity - 1;
+      this.cartService.updateQuantity(product._id, currentQuantity - 1).subscribe(() => {
+        this.countingCart();
+      });
+    }
   }
 
   ngOnInit() {

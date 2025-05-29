@@ -10,4 +10,3 @@ export interface ProductCartItem {
     product: Product;
     quantity: number;
 }
-  

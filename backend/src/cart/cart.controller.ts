@@ -1,8 +1,9 @@
-import { Controller, Post, Body, Param, Delete, Get, ParseIntPipe } from '@nestjs/common';
+import { Controller, Post, Body, Param, Delete, Get, UseGuards } from '@nestjs/common';
 import { CartService } from './cart.service';
 import { CartItem } from './cart-item.interface';
 import { AddToCartDto } from './dto/add-to-cart.dto';
 import { UpdateQuantityDto } from './dto/update-quantity.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('cart')
 export class CartController {
@@ -32,6 +33,7 @@ export class CartController {
     this.cartService.updateQuantity(productId, quantity);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete('clear')
   clearCart(): void {
     this.cartService.clearCart();

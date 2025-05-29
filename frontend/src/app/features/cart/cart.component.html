@@ -43,7 +43,11 @@
           <td>{{ item.product.details }}</td>
           <td>${{ item.product.price }}</td>
           <td>
-            <input class="quantity-input" type="number" [(ngModel)]="item.quantity" (change)="updateQuantity(item.product._id, item.quantity)" min="1">
+            <div class="quantity-controls">
+              <button class="quantity-btn" (click)="decreaseQuantity(item.product._id, item.quantity)" [disabled]="item.quantity <= 1">-</button>
+              <span class="quantity">{{ item.quantity }}</span>
+              <button class="quantity-btn" (click)="increaseQuantity(item.product._id, item.quantity)">+</button>
+            </div>
           </td>
           <td>
             <button (click)="removeFromCart(item.product._id)">Remove</button>

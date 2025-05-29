@@ -32,7 +32,11 @@
           <h3 class="product-name">{{ product.name }}</h3>
           <p class="product-price">{{ product.price }}$</p>
           <button class="view-details-btn" (click)="viewDetails(product)">View Details</button>
-          <button class="add-to-cart-btn" (click)="addToCart(product)">Add to Cart</button>
+          <div class="quantity-controls">
+            <button class="quantity-btn" (click)="decreaseQuantity(product)" [disabled]="getProductQuantity(product) <= 0">-</button>
+            <span class="quantity">{{ getProductQuantity(product) }}</span>
+            <button class="quantity-btn" (click)="increaseQuantity(product)">+</button>
+          </div>
         </div>
       </div>
     </div>

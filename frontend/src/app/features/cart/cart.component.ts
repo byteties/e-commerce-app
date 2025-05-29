@@ -42,9 +42,18 @@ export class CartComponent implements OnInit {
     });
   }
 
-  updateQuantity(productId: string, quantity: number): void {
-    this.cartService.updateQuantity(productId, quantity);
-    this.getCartProducts();
+  increaseQuantity(productId: string, currentQuantity: number): void {
+    this.cartService.updateQuantity(productId, currentQuantity + 1).subscribe(() => {
+      this.getCartProducts();
+    });
+  }
+
+  decreaseQuantity(productId: string, currentQuantity: number): void {
+    if (currentQuantity > 1) {
+      this.cartService.updateQuantity(productId, currentQuantity - 1).subscribe(() => {
+        this.getCartProducts();
+      });
+    }
   }
 
   removeFromCart(productId: string): void{
